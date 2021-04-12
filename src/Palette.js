@@ -27,7 +27,7 @@ class Palette extends Component {
                 background={color[format]}
                 name={color.name}
                 key={color.id}
-                moreUrl={`/palette/${id}/${color.id}`} showLink />
+                moreUrl={`/palette/${id}/${color.id}`} showingFullPalette />
         ))
         return (
             <div className="Palette">
