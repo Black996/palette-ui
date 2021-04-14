@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function NewPaletteForm() {
+function NewPaletteForm(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [currentColor, setColor] = React.useState("teal");
@@ -92,16 +92,27 @@ function NewPaletteForm() {
 
     const updateCurrentColor = (newColor) => {
         setColor(newColor.hex);
-    }
+    };
 
     const handleAddColor = () => {
         const newColor = { color: currentColor, name: newName }
         setNewColors([...colors, newColor]);
         setNewName("");
-    }
+    };
 
     const handleChange = (evt) => {
         setNewName(newName => evt.target.value)
+    };
+
+    const handleSubmit = () => {
+        let newPaletteName = "New Test Palette";
+        const newPalette = {
+            paletteName: "New Test Palette",
+            id: newPaletteName.toLowerCase().replace(/ /g, "-"),
+            colors: colors
+        }
+        props.savePalette(newPalette)
+        props.history.push("/");
     }
 
     useEffect(() => {
@@ -126,6 +137,7 @@ function NewPaletteForm() {
             <CssBaseline />
             <AppBar
                 position="fixed"
+                color="default"
                 className={clsx(classes.appBar, {
                     [classes.appBarShift]: open,
                 })}
@@ -143,6 +155,7 @@ function NewPaletteForm() {
                     <Typography variant="h6" noWrap>
                         Persistent drawer
           </Typography>
+                    <Button variant="contained" color="primary" onClick={handleSubmit}>Save Palette</Button>
                 </Toolbar>
             </AppBar>
             <Drawer
