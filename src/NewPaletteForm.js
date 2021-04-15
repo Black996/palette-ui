@@ -214,8 +214,8 @@ function NewPaletteForm(props) {
                         value={colorName}
                         onChange={handleChange}
                         name="colorName"
-                        validators={["isColorNameUnique", "isColorUnique"]}
-                        errorMessages={["Color name must be unique", "Color already used"]}
+                        validators={["required", "isColorNameUnique", "isColorUnique"]}
+                        errorMessages={["Must have a name", "Color name must be unique", "Color already used"]}
                     />
                     <Button variant="contained" style={{ backgroundColor: currentColor }} type="submit">Add Color</Button>
                 </ValidatorForm>
