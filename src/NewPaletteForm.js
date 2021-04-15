@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -75,12 +75,23 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 function NewPaletteForm(props) {
+
+    // const initialState = {
+    //     open: false,
+    //     currentColor: "teal",
+    //     colors: [],
+    //     colorName: ""
+    // };
+
+    // const [state, setState] = useState(initialState);
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [currentColor, setColor] = React.useState("teal");
     const [colors, setNewColors] = React.useState([]);
-    const [newName, setNewName] = React.useState("");
+    const [colorName, setcolorName] = React.useState("");
+    const [newPaletteName, setNewPaletteName] = React.useState("");
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -95,20 +106,21 @@ function NewPaletteForm(props) {
     };
 
     const handleAddColor = () => {
-        const newColor = { color: currentColor, name: newName }
+        const newColor = { color: currentColor, name: colorName }
         setNewColors([...colors, newColor]);
-        setNewName("");
+        setcolorName("");
     };
 
     const handleChange = (evt) => {
-        setNewName(newName => evt.target.value)
+        if (evt.target.name === "colorName") setcolorName(colorName => colorName = evt.target.value);
+        if (evt.target.name === "newPaletteName") setNewPaletteName(newPaletteName => evt.target.value);
     };
 
     const handleSubmit = () => {
-        let newPaletteName = "New Test Palette";
+        let newName = newPaletteName;
         const newPalette = {
-            paletteName: "New Test Palette",
-            id: newPaletteName.toLowerCase().replace(/ /g, "-"),
+            paletteName: newName,
+            id: newName.toLowerCase().replace(/ /g, "-"),
             colors: colors
         }
         props.savePalette(newPalette)
@@ -124,6 +136,11 @@ function NewPaletteForm(props) {
         ValidatorForm.addValidationRule("isColorUnique", value => {
             return colors.every(
                 ({ color }) => color !== currentColor
+            );
+        });
+        ValidatorForm.addValidationRule("isPaletteNameUnique", value => {
+            return props.palettes.every(
+                ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
             );
         });
     });
@@ -155,7 +172,17 @@ function NewPaletteForm(props) {
                     <Typography variant="h6" noWrap>
                         Persistent drawer
           </Typography>
-                    <Button variant="contained" color="primary" onClick={handleSubmit}>Save Palette</Button>
+                    <ValidatorForm onSubmit={handleSubmit}>
+                        <TextValidator
+                            label="Palette Name"
+                            value={newPaletteName}
+                            onChange={handleChange}
+                            name="newPaletteName"
+                            validators={["required", "isPaletteNameUnique"]}
+                            errorMessages={["Enter Palette Name", "Palette name already used"]}
+                        />
+                        <Button variant="contained" color="primary" type="submit">Save Palette</Button>
+                    </ValidatorForm>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -184,8 +211,9 @@ function NewPaletteForm(props) {
                 />
                 <ValidatorForm onSubmit={handleAddColor}>
                     <TextValidator
-                        value={newName}
+                        value={colorName}
                         onChange={handleChange}
+                        name="colorName"
                         validators={["isColorNameUnique", "isColorUnique"]}
                         errorMessages={["Color name must be unique", "Color already used"]}
                     />

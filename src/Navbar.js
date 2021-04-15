@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Slider, { Range } from 'rc-slider';
+import Slider from 'rc-slider';
 import { Select, MenuItem, Snackbar, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { withStyles } from "@material-ui/styles";
