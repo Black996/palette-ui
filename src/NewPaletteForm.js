@@ -14,6 +14,8 @@ import { ChromePicker } from 'react-color';
 import { Button } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import DraggableColorBox from './DraggableColorBox';
+import DraggableColorList from "./DraggableColorList";
+import { arrayMove } from 'react-sortable-hoc';
 
 const drawerWidth = 350;
 
@@ -131,7 +133,13 @@ function NewPaletteForm(props) {
         setNewColors(
             colors.filter(color => color.name !== colorName)
         )
+    };
+
+    const onSortEnd = ({ oldIndex, newIndex }) => {
+
+        setNewColors(arrayMove(colors, oldIndex, newIndex));
     }
+
 
     useEffect(() => {
         ValidatorForm.addValidationRule("isColorNameUnique", value => {
@@ -232,11 +240,12 @@ function NewPaletteForm(props) {
                 })}
             >
                 <div className={classes.drawerHeader} />
-                {colors.map(color => (<DraggableColorBox
-                    color={color.color}
-                    name={color.name}
-                    key={color.name}
-                    handleClick={() => removeColor(color.name)} />))}
+                <DraggableColorList
+                    colors={colors}
+                    removeColor={removeColor}
+                    axis="xy"
+                    onSortEnd={onSortEnd}
+                />
             </main>
         </div>
     );
