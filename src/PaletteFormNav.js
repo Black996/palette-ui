@@ -48,7 +48,7 @@ function PaletteFormNav(props) {
     const classes = useStyles();
     const [newPaletteName, setNewPaletteName] = React.useState("")
     const { open, handleSubmit, handleDrawerOpen } = props;
-    const [formShow, setFormShow] = React.useState(false);
+    // const [formShow, setFormShow] = React.useState(false);
 
     // const handleFormShowing = () => {
     //     setFormShow(true);
@@ -101,7 +101,7 @@ function PaletteFormNav(props) {
                 </div>
             </AppBar>
 
-            <PaletteMetaForm palettes={props.palettes} handleSubmit={handleSubmit} open={state.openForm} handleFormShowing={handleFormShowing} />
+            <PaletteMetaForm palettes={props.palettes} handleSubmit={handleSubmit} openForm={state.openForm} handleFormShowing={handleFormShowing} />
 
         </div>
     )

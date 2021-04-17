@@ -111,12 +111,9 @@ function NewPaletteForm(props) {
 
     // Uses the moved setNewPaletteName
 
-    const handleSubmit = (newPaletteName) => {
-        const newPalette = {
-            paletteName: newPaletteName,
-            id: newPaletteName.toLowerCase().replace(/ /g, "-"),
-            colors: colors
-        }
+    const handleSubmit = (newPalette) => {
+        newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g, "-");
+        newPalette.colors = colors;
         props.savePalette(newPalette)
         props.history.push("/");
     };
@@ -141,7 +138,6 @@ function NewPaletteForm(props) {
         const randIdx = Math.floor(Math.random() * allColors.length);
         const randColor = allColors[randIdx];
         setNewColors([...colors, randColor]);
-        console.log(allColors);
     }
 
 
@@ -173,8 +169,23 @@ function NewPaletteForm(props) {
                 <div className={classes.container}>
                     <Typography variant="h4" gutterBottom>Design Your Palette</Typography>
                     <div className={classes.buttons}>
-                        <Button className={classes.button} variant="contained" color="secondary" onClick={clearColors}>Clear Palette</Button>
-                        <Button className={classes.button} variant="contained" color="primary" disabled={paletteIsFull} onClick={addRandomColor}>Random Color</Button>
+                        <Button
+                            className={classes.button}
+                            variant="contained"
+                            color="secondary"
+                            onClick={clearColors}
+                        >
+                            Clear Palette
+                            </Button>
+                        <Button
+                            className={classes.button}
+                            variant="contained"
+                            color="primary"
+                            disabled={paletteIsFull}
+                            onClick={addRandomColor}
+                        >
+                            Random Color
+                            </Button>
                     </div>
                     <ColorPickerForm paletteIsFull={paletteIsFull} handleAddColor={handleAddColor} colors={colors} />
                 </div>
