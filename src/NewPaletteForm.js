@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 import PaletteFormNav from "./PaletteFormNav";
 import ColorPickerForm from "./ColorPickerForm";
 import Drawer from '@material-ui/core/Drawer';
@@ -11,65 +10,66 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { Button } from '@material-ui/core';
 import DraggableColorList from "./DraggableColorList";
 import { arrayMove } from 'react-sortable-hoc';
+import useStyles from "./styles/NewPaletteFormStyles"
 
-const drawerWidth = 350;
+// const drawerWidth = 350;
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-    },
-    hide: {
-        display: 'none',
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-    },
-    drawerPaper: {
-        width: drawerWidth,
-        display: "flex",
-        alignItems: "center"
-    },
-    drawerHeader: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
-    },
-    content: {
-        flexGrow: 1,
-        height: "calc(100vh - 64px)",
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: -drawerWidth,
-    },
-    contentShift: {
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-        marginLeft: 0,
-    },
-    container: {
-        width: "90%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    buttons: {
-        width: "100%"
-    },
-    button: {
-        width: "50%"
-    }
-}));
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//         display: 'flex',
+//     },
+//     hide: {
+//         display: 'none',
+//     },
+//     drawer: {
+//         width: drawerWidth,
+//         flexShrink: 0,
+//     },
+//     drawerPaper: {
+//         width: drawerWidth,
+//         display: "flex",
+//         alignItems: "center"
+//     },
+//     drawerHeader: {
+//         display: 'flex',
+//         alignItems: 'center',
+//         padding: theme.spacing(0, 1),
+//         // necessary for content to be below app bar
+//         ...theme.mixins.toolbar,
+//         justifyContent: 'flex-end',
+//     },
+//     content: {
+//         flexGrow: 1,
+//         height: "calc(100vh - 64px)",
+//         padding: theme.spacing(3),
+//         transition: theme.transitions.create('margin', {
+//             easing: theme.transitions.easing.sharp,
+//             duration: theme.transitions.duration.leavingScreen,
+//         }),
+//         marginLeft: -drawerWidth,
+//     },
+//     contentShift: {
+//         transition: theme.transitions.create('margin', {
+//             easing: theme.transitions.easing.easeOut,
+//             duration: theme.transitions.duration.enteringScreen,
+//         }),
+//         marginLeft: 0,
+//     },
+//     container: {
+//         width: "90%",
+//         height: "100%",
+//         display: "flex",
+//         flexDirection: "column",
+//         justifyContent: "center",
+//         alignItems: "center"
+//     },
+//     buttons: {
+//         width: "100%"
+//     },
+//     button: {
+//         width: "50%"
+//     }
+// }));
 
 
 NewPaletteForm.defaultProps = {
@@ -111,12 +111,9 @@ function NewPaletteForm(props) {
 
     // Uses the moved setNewPaletteName
 
-    const handleSubmit = (newPaletteName) => {
-        const newPalette = {
-            paletteName: newPaletteName,
-            id: newPaletteName.toLowerCase().replace(/ /g, "-"),
-            colors: colors
-        }
+    const handleSubmit = (newPalette) => {
+        newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g, "-");
+        newPalette.colors = colors;
         props.savePalette(newPalette)
         props.history.push("/");
     };
@@ -141,7 +138,6 @@ function NewPaletteForm(props) {
         const randIdx = Math.floor(Math.random() * allColors.length);
         const randColor = allColors[randIdx];
         setNewColors([...colors, randColor]);
-        console.log(allColors);
     }
 
 
@@ -173,8 +169,23 @@ function NewPaletteForm(props) {
                 <div className={classes.container}>
                     <Typography variant="h4" gutterBottom>Design Your Palette</Typography>
                     <div className={classes.buttons}>
-                        <Button className={classes.button} variant="contained" color="secondary" onClick={clearColors}>Clear Palette</Button>
-                        <Button className={classes.button} variant="contained" color="primary" disabled={paletteIsFull} onClick={addRandomColor}>Random Color</Button>
+                        <Button
+                            className={classes.button}
+                            variant="contained"
+                            color="secondary"
+                            onClick={clearColors}
+                        >
+                            Clear Palette
+                            </Button>
+                        <Button
+                            className={classes.button}
+                            variant="contained"
+                            color="primary"
+                            disabled={paletteIsFull}
+                            onClick={addRandomColor}
+                        >
+                            Random Color
+                            </Button>
                     </div>
                     <ColorPickerForm paletteIsFull={paletteIsFull} handleAddColor={handleAddColor} colors={colors} />
                 </div>
