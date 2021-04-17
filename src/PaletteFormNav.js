@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import PaletteMetaForm from "./PaletteMetaForm";
 import { Link } from "react-router-dom";
@@ -46,9 +46,26 @@ const useStyles = makeStyles((theme) => ({
 
 function PaletteFormNav(props) {
     const classes = useStyles();
-    const [newPaletteName, setNewPaletteName] = React.useState("");
+    const [newPaletteName, setNewPaletteName] = React.useState("")
     const { open, handleSubmit, handleDrawerOpen } = props;
+    const [formShow, setFormShow] = React.useState(false);
 
+    // const handleFormShowing = () => {
+    //     setFormShow(true);
+    // }
+
+
+
+    const [state, setState] = React.useState({
+        openForm: false
+    })
+
+    const handleFormShowing = () => {
+        setState({
+            ...state,
+            openForm: !state.openForm
+        })
+    }
 
     return (
         <div className={classes.root}>
@@ -75,12 +92,17 @@ function PaletteFormNav(props) {
           </Typography>
                 </Toolbar>
                 <div className={classes.navBtns}>
-                    <PaletteMetaForm palettes={props.palettes} handleSubmit={handleSubmit} />
                     <Link to="/">
                         <Button variant="contained" color="secondary">Go Back</Button>
                     </Link>
+                    <Button variant="outlined" color="primary" onClick={handleFormShowing}>
+                        Save
+                    </Button>
                 </div>
             </AppBar>
+
+            <PaletteMetaForm palettes={props.palettes} handleSubmit={handleSubmit} open={state.openForm} handleFormShowing={handleFormShowing} />
+
         </div>
     )
 }
