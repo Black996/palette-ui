@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex"
     },
+    hide: {
+        display: 'none',
+    },
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
@@ -29,7 +32,12 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
     },
     navBtns: {
-
+        display: "flex",
+        alignItems: "center",
+        marginRight: "5px",
+        "& a": {
+            padding: "5px"
+        }
     }
 }));
 
