@@ -12,11 +12,9 @@ import { Button } from '@material-ui/core';
 import useStyles from "./styles/PaletteFormNavStyles";
 
 
-
-
 function PaletteFormNav(props) {
     const classes = useStyles();
-    const [newPaletteName, setNewPaletteName] = React.useState("")
+    // const [newPaletteName, setNewPaletteName] = React.useState("")
     const { open, handleSubmit, handleDrawerOpen } = props;
     // const [formShow, setFormShow] = React.useState(false);
 
