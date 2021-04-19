@@ -2,13 +2,22 @@ import sizes from "./sizes";
 import bg from "./bg.svg";
 
 const styles = {
+
+    "@global": {
+        ".fade-exit": {
+            opacity: 1
+        },
+        ".fade-exit-active": {
+            opacity: 0,
+            transition: "opactiy 500ms ease-out"
+        }
+    },
     root: {
-        backgroundColor: "blue",
         height: "110vh",
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "center",
-        backgroundColor: "3192faa",
+        backgroundColor: "#3192faa",
         // background by SVGBackgrounds.com
         backgroundImage: `url(${bg})`,
         overflow: "scroll"
