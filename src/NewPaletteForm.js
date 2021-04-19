@@ -10,6 +10,7 @@ import { Button } from '@material-ui/core';
 import PaletteFormNav from "./PaletteFormNav";
 import ColorPickerForm from "./ColorPickerForm";
 import DraggableColorList from "./DraggableColorList";
+import seedColors from "./seedColors";
 import useStyles from "./styles/NewPaletteFormStyles"
 
 
@@ -22,7 +23,7 @@ function NewPaletteForm(props) {
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
-    const [colors, setNewColors] = React.useState(props.palettes[0].colors);
+    const [colors, setNewColors] = React.useState(seedColors[0].colors);
 
     const handleDrawerOpen = () => {
         setOpen(true);
