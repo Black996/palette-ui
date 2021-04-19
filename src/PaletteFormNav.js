@@ -1,5 +1,4 @@
 import React from "react";
-import PaletteMetaForm from "./PaletteMetaForm";
 import { Link } from "react-router-dom";
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,19 +8,14 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import { Button } from '@material-ui/core';
+import PaletteMetaForm from "./PaletteMetaForm";
 import useStyles from "./styles/PaletteFormNavStyles";
 
 
 function PaletteFormNav(props) {
     const classes = useStyles();
-    // const [newPaletteName, setNewPaletteName] = React.useState("")
-    const { open, handleSubmit, handleDrawerOpen } = props;
-    // const [formShow, setFormShow] = React.useState(false);
 
-    // const handleFormShowing = () => {
-    //     setFormShow(true);
-    // }
-
+    const { open, palettes, handleSubmit, handleDrawerOpen } = props;
 
 
     const [state, setState] = React.useState({
@@ -69,7 +63,11 @@ function PaletteFormNav(props) {
                 </div>
             </AppBar>
 
-            <PaletteMetaForm palettes={props.palettes} handleSubmit={handleSubmit} openForm={state.openForm} handleFormShowing={handleFormShowing} />
+            <PaletteMetaForm
+                palettes={palettes}
+                handleSubmit={handleSubmit}
+                openForm={state.openForm}
+                handleFormShowing={handleFormShowing} />
 
         </div>
     )

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Slider from 'rc-slider';
 import { Select, MenuItem, Snackbar, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { withStyles } from "@material-ui/styles";
 import { Link } from 'react-router-dom';
+import { withStyles } from "@material-ui/styles";
 import 'rc-slider/assets/index.css';
 import styles from "./styles/NavbarStyles";
 

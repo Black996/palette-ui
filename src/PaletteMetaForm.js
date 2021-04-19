@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
 
@@ -76,14 +76,6 @@ class PaletteMetaForm extends Component {
                                 validators={["required", "isPaletteNameUnique"]}
                                 errorMessages={["Enter Palette Name", "Palette name already used"]}
                             />
-                            {/* <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Email Address"
-                            type="email"
-                            fullWidth
-                        /> */}
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleFormShowing} color="primary">
