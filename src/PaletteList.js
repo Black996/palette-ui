@@ -29,7 +29,7 @@ class PaletteList extends Component {
         this.setState({ deleteingId: id });
     }
 
-    goToPalette(id) {
+    goToPalette = (id) => {
         this.props.history.push(`/palette/${id}`);
     }
 
@@ -58,7 +58,7 @@ class PaletteList extends Component {
                                 <MiniPalette
                                     {...palette}
                                     key={palette.id}
-                                    handleClick={() => this.goToPalette(palette.id)}
+                                    goToPalette={this.goToPalette}
                                     // deletePalette={this.props.deletePalette}
                                     showDeleteDialog={this.toggleDeleteDialog}
 

@@ -13,7 +13,7 @@ const styles = {
         }
     },
     root: {
-        height: "110vh",
+        height: "100vh",
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "center",
@@ -45,6 +45,7 @@ const styles = {
         }
     },
     nav: {
+        marginTop: "-30px",
         display: "flex",
         width: "100%",
         justifyContent: "space-between",
@@ -59,10 +60,10 @@ const styles = {
         width: "100%",
         display: "grid",
         gridTemplateColumns: "repeat(3,30%)",
-        gridGap: "2.5rem",
+        gridGap: "1.7rem",
         [sizes.down("md")]: {
             gridTemplateColumns: "repeat(2,50%)",
-            gridGap: "1.5rem"
+            gridGap: "1rem"
         },
         [sizes.down("xs")]: {
             width: "75%",

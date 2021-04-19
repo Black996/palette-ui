@@ -8,7 +8,6 @@ import { generatePalette } from "./colorHelpers";
 import NewPaletteForm from './NewPaletteForm';
 
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -62,10 +61,6 @@ class App extends Component {
         />
       </Switch>
 
-
-      //   <div>
-      //     <Palette palette={generatePalette(seedColors[4])} />
-      //   </div>
     )
   }
 }
