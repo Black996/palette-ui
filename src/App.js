@@ -59,6 +59,7 @@ class App extends Component {
               colorId={routeProps.match.params.colorId}
               palette={generatePalette(this.findPalette(routeProps.match.params.paletteId))} />)}
         />
+        <Route render={(routeProps) => <PaletteList palettes={palettes} {...routeProps} deletePalette={this.deletePalette} />} />
       </Switch>
 
     )
